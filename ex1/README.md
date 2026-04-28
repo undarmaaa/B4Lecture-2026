@@ -8,7 +8,7 @@
 ## 課題
 
 1. SkillCornerのトラッキングデータを描画する
-   - `data_path = /data_pool_1/laliga/skillcorner`
+   - `data_path = /mnt/datapool00/laliga_23/skillcorner_v2/`
 2. 指定選手の速度と加速度の折れ線グラフを表示する
 3. ボールの軌跡を5フレーム残して表示する（応用）
 
