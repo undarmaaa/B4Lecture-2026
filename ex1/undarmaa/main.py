@@ -74,9 +74,8 @@ def plot_speed_acceleration(
 ):
     """Plot speed and acceleration from frame 10 to frame 500."""
     speed_mask = (speed_frames >= START_FRAME) & (speed_frames <= END_FRAME)
-    acceleration_mask = (
-        (acceleration_frames >= START_FRAME)
-        & (acceleration_frames <= END_FRAME)
+    acceleration_mask = (acceleration_frames >= START_FRAME) & (
+        acceleration_frames <= END_FRAME
     )
 
     plt.figure(figsize=(12, 6))
@@ -101,6 +100,7 @@ def plot_speed_acceleration(
     plt.savefig(output_path)
     plt.close()
 
+
 def draw_pitch(ax, pitch_length, pitch_width):
     """Draw a simple soccer pitch."""
     x_min = -pitch_length / 2
@@ -108,11 +108,10 @@ def draw_pitch(ax, pitch_length, pitch_width):
     y_min = -pitch_width / 2
     y_max = pitch_width / 2
 
-    ax.plot([x_min, x_max, x_max, x_min, x_min],
-            [y_min, y_min, y_max, y_max, y_min])
+    ax.plot([x_min, x_max, x_max, x_min, x_min], [y_min, y_min, y_max, y_max, y_min])
     ax.axvline(0)
     ax.add_patch(plt.Circle((0, 0), 9.15, fill=False))
-    
+
     # Left penalty area
     ax.plot(
         [-52.5, -36.0],
@@ -276,6 +275,8 @@ def plot_tracking_frame(tracking_data, match_data, frame_number, output_path):
     plt.tight_layout()
     plt.savefig(output_path)
     plt.close()
+
+
 def create_tracking_animation(
     tracking_data,
     match_data,
@@ -310,13 +311,13 @@ def create_tracking_animation(
     away_scatter = ax.scatter([], [], s=70, label="Away")
     ball_scatter = ax.scatter([], [], s=120, label="Ball")
     target_scatter = ax.scatter([], [], s=180, marker="*", label="Target player")
-    ball_trail_line, = ax.plot(
-      [],
-      [],
-      marker="o",
-      color="green",
-      linewidth=2,
-      label="Ball trail",
+    (ball_trail_line,) = ax.plot(
+        [],
+        [],
+        marker="o",
+        color="green",
+        linewidth=2,
+        label="Ball trail",
     )
 
     title = ax.set_title("")
@@ -395,6 +396,7 @@ def create_tracking_animation(
     animation.save(output_path, fps=10)
     plt.close()
 
+
 def main():
     tracking_path = f"{DATA_PATH}/tracking/{MATCH_ID}.json"
     match_path = f"{DATA_PATH}/match/{MATCH_ID}.json"
@@ -406,14 +408,14 @@ def main():
     match_data = load_json(match_path)
 
     pitch_output_path = f"{output_dir}/pitch_frame_10.png"
-    plot_tracking_frame (
-    	tracking_data,
-    	match_data,
-    	START_FRAME,
-    	pitch_output_path,
+    plot_tracking_frame(
+        tracking_data,
+        match_data,
+        START_FRAME,
+        pitch_output_path,
     )
     print(f"Saved pitch visualization to {pitch_output_path}")
-    
+
     animation_output_path = f"{output_dir}/tracking_animation_10_500.mp4"
     create_tracking_animation(
         tracking_data,
