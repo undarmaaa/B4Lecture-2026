@@ -1,0 +1,10 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Deep-EIoU directory (clone separately, see README)
+Deep-EIoU/
+
+# OS
+.DS_Store
